@@ -12,6 +12,10 @@
   white-space: nowrap !important; /* 3 */
 }
 
+.home_container {
+  height: calc(100vh - 160px);
+}
+
 .hero {
   background-image: url("../../assets/img/bank-tree.jpeg");
   background-position: 0 -50px;

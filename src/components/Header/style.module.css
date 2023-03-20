@@ -15,6 +15,8 @@
 .main_nav {
   display: flex;
   justify-content: space-between;
+  min-height: 55px;
+  max-height: 55px;
   align-items: center;
   padding: 5px 20px;
 }

@@ -6,7 +6,7 @@ import s from "./style.module.css";
 
 export function Home() {
   return (
-    <main>
+    <main className={s.home_container}>
       <div className={s.hero}>
         <section className={s.hero_content}>
           <h2 className={s.sr_only}>Promoted Content</h2>
