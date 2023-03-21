@@ -12,6 +12,10 @@
   white-space: nowrap !important; /* 3 */
 }
 
+.header_signin_link {
+  margin-right: 0.5rem;
+}
+
 .main_nav {
   display: flex;
   justify-content: space-between;
@@ -42,6 +46,18 @@
 .main_nav_logo {
   display: flex;
   align-items: center;
+}
+
+@media (min-width: 320px) {
+  .main_nav_logo {
+    max-width: 150px;
+  }
+}
+
+@media (min-width: 768px) {
+  .main_nav_logo {
+    max-width: 300px;
+  }
 }
 
 .main_nav_logo_image {

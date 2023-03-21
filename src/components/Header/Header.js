@@ -16,7 +16,7 @@ export function Header() {
       </NavLink>
       <div>
         <NavLink to="/signin" className={s.main_nav_item}>
-          <i className="fa fa-user-circle"></i>
+          <i className={`fa fa-user-circle ${s.header_signin_link}`}></i>
           Sign In
         </NavLink>
       </div>

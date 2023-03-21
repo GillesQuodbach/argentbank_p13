@@ -11,9 +11,34 @@
   width: 1px !important;
   white-space: nowrap !important; /* 3 */
 }
-
+@media (min-width: 1440px) {
+  body {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 .home_container {
   height: calc(100vh - 160px);
+}
+
+@media (min-width: 320px) {
+  .home_container {
+    height: auto;
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .home_container {
+    height: calc(100vh - 180px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .home_container {
+    height: calc(100vh - 170px);
+  }
 }
 
 .hero {
@@ -35,6 +60,31 @@
   margin: 0 auto;
 }
 
+/*! MOBILE */
+
+/*! TABLETTE */
+
+@media (min-width: 768px) {
+  .hero {
+    display: flex;
+    flex-direction: row;
+    height: 250px;
+  }
+  .hero_content {
+    height: 100px;
+    background-position: 0% 33%;
+    margin-right: 70px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero_content {
+    height: 150px;
+    background-position: 0% 33%;
+    margin-right: 70px;
+  }
+}
+
 .hero_content .subtitle {
   font-weight: bold;
   font-size: 1rem;
@@ -46,9 +96,34 @@
   font-size: 0.9rem;
 }
 
+/*! DESKTOP */
+
 @media (min-width: 920px) {
   .hero {
     height: 400px;
+    background-position: 0% 33%;
+  }
+
+  .hero_content {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 300px;
+    margin: 2rem;
+  }
+
+  .hero_content .subtitle {
+    font-size: 1.5rem;
+  }
+
+  .hero_content .text {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    height: 340px;
     background-position: 0% 33%;
   }
 
@@ -74,9 +149,28 @@
   flex-direction: column;
 }
 
+@media (min-width: 320px) {
+  .features {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 768px) {
+  .features {
+    flex-direction: row;
+  }
+}
+
 @media (min-width: 920px) {
   .features {
     flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  .features {
+    flex-direction: row;
+    max-height: 280px;
   }
 }
 
@@ -87,9 +181,29 @@
   padding: 1rem;
 }
 
+@media (min-width: 320px) {
+  .feature_icon {
+    width: 50px;
+  }
+}
+
 .feature_item {
   flex: 1;
   padding: 2.5rem;
+}
+
+@media (min-width: 320px) {
+  .feature_item {
+    padding-top: 0.2rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .feature_item {
+    flex: 1;
+    padding: 2rem;
+  }
 }
 
 .feature_item_title {
