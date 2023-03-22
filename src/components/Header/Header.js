@@ -15,7 +15,7 @@ export function Header() {
         <h1 className={s.sr_only}>Argent Bank</h1>
       </NavLink>
       <div>
-        <NavLink to="/signin" className={s.main_nav_item}>
+        <NavLink to="/login" className={s.main_nav_item}>
           <i className={`fa fa-user-circle ${s.header_signin_link}`}></i>
           Sign In
         </NavLink>

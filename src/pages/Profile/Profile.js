@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./style.module.css";
 
-export function User() {
+export function Profile() {
   return (
     <main className={`${s.main} ${s.bg_dark}`}>
       <div className={s.header}>

@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./style.module.css";
 
-export function SignInForm() {
+export function Login() {
   return (
     <main className={`${s.main} ${s.bg_dark}`}>
       <section className={s.sign_in_content}>
