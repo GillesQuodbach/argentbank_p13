@@ -1,23 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home } from "./pages/Home/Home";
-import { PageNotFound } from "./pages/PageNotFound/PageNotFound";
-import { Login } from "./pages/Login/Login";
-import { Profile } from "./pages/Profile/Profile";
+import {Provider} from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { PublicRouter } from "pages/Public/PublicRouter";
+import { AdminRouter } from "pages/Admin/AdminRouter";
+import AuthGuard from "_helpers/AuthGuard";
+import {store} from "./store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+    <Provider store={store}>
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />}>
-        <Route index element={<Home />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Route>
+      <Route path="/*" element={<PublicRouter />} />
+      <Route
+        path="/admin/*"
+        element={
+          <AuthGuard>
+            <AdminRouter />
+          </AuthGuard>
+        }
+      />
     </Routes>
   </BrowserRouter>
+    </Provider>
 );
