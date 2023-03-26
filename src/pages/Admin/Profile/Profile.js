@@ -16,6 +16,7 @@ export function Profile() {
                 console.log(res.data.body.lastName)
                 setLastName(res.data.body.lastName)
             })
+
             .catch(err => console.log(err))
     }, []);
   return (
