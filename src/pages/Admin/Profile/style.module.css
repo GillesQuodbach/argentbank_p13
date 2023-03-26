@@ -11,7 +11,9 @@
 .bg_dark {
   background-color: #12002b;
 }
-
+.user_infos_container{
+  text-align: center;
+}
 .account {
   display: flex;
   justify-content: space-between;

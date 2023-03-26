@@ -22,7 +22,7 @@ export function Profile() {
   return (
     <main className={`${s.main} ${s.bg_dark}`}>
       <div className={s.header}>
-        <h1>
+        <h1 className={s.user_infos_container}>
           Welcome back
           <br />
             {firstName} {lastName}
