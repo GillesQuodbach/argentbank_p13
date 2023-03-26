@@ -1,3 +1,9 @@
+import Axios from "./caller.service";
+
+
+let login = (credentials)=> {
+  return Axios.post('user/login', credentials)
+}
 let saveToken = (token) => {
   localStorage.setItem("token", token);
 };
@@ -11,8 +17,14 @@ let isLogged = () => {
   return !!token; //permet de transformer n'importe quelle variable en booleen
 };
 
+let getToken = () => {
+  return localStorage.getItem('token')
+}
+
 export const accountService = {
+  login,
   saveToken,
   logout,
   isLogged,
+  getToken
 };

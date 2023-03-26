@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { accountService } from "_services/account_service";
 import s from "./style.module.css";
+import {userService} from "../../../_services/user.service";
 
 export function Login() {
   let navigate = useNavigate();
+
+
+
+
 
   const [credentials, setCredentials] = useState({
     email: "tony@stark.com",
@@ -22,11 +26,13 @@ export function Login() {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(credentials);
-    axios
-      .post("http://localhost:3001/api/v1/user/login", credentials)
+    accountService.login(credentials)
       .then((res) => {
+        //reponse complète
         console.log(res);
-        accountService.saveToken(res.data.access_token);
+        //token dans la reponse
+        console.log(res.data.body.token);
+        accountService.saveToken(res.data.body.token);
         navigate("/admin/profile");
       })
       .catch((error) => console.log(error));

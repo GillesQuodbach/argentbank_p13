@@ -2,8 +2,17 @@ import React from "react";
 import logo from "../../assets/img/argentBankLogo.png";
 import { NavLink } from "react-router-dom";
 import s from "./style.module.css";
+import {accountService} from "../../_services/account_service";
+import {useNavigate} from "react-router-dom";
 
 export function Header() {
+const navigate = useNavigate()
+    const logout = () => {
+        accountService.logout()
+        navigate('/')
+    }
+
+
   return (
     <nav className={s.main_nav}>
       <NavLink to="/" className={s.main_nav_logo}>
@@ -19,6 +28,11 @@ export function Header() {
           <i className={`fa fa-user-circle ${s.header_signin_link}`}></i>
           Sign In
         </NavLink>
+
+          <NavLink to="/" className={s.main_nav_item} onClick={logout}>
+              <i className={`fa fa-user-circle ${s.header_signin_link}`}></i>
+              LogOut
+          </NavLink>
       </div>
     </nav>
   );

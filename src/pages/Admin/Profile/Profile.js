@@ -1,14 +1,30 @@
-import React from "react";
+import React, {useEffect,useState} from "react";
 import s from "./style.module.css";
+import {userService} from "../../../_services/user.service";
 
 export function Profile() {
+
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+
+    useEffect(() => {
+        userService.getUserProfile()
+            .then(res => {
+                console.log(res.data) // réponse complète
+                console.log(res.data.body.firstName)
+                setFirstName(res.data.body.firstName)
+                console.log(res.data.body.lastName)
+                setLastName(res.data.body.lastName)
+            })
+            .catch(err => console.log(err))
+    }, []);
   return (
     <main className={`${s.main} ${s.bg_dark}`}>
       <div className={s.header}>
         <h1>
           Welcome back
           <br />
-          Tony Jarvis!
+            {firstName} {lastName}
         </h1>
         <button className={s.edit_button}>Edit Name</button>
       </div>
