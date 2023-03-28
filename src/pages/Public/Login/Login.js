@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { accountService } from "_services/account_service";
 import s from "./style.module.css";
 import {userService} from "../../../_services/user.service";
+import {useDispatch} from "react-redux";
+import {addUserToken} from "../../../store/user/user-slice";
 
 export function Login() {
   let navigate = useNavigate();
-
+const dispatch = useDispatch()
 
 
 
@@ -29,10 +31,14 @@ export function Login() {
     accountService.login(credentials)
       .then((res) => {
         //reponse complète
-        console.log(res);
+        // console.log(res);
         //token dans la reponse
-        console.log(res.data.body.token);
-        accountService.saveToken(res.data.body.token);
+        // console.log(res.data.body.token);
+        const token = res.data.body.token
+        //Save token in localstorage
+        accountService.saveToken(token);
+        //Save token in the store
+        dispatch(addUserToken(token))
         navigate("/admin/profile");
       })
       .catch((error) => console.log(error));
