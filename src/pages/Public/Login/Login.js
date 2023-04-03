@@ -2,43 +2,47 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { accountService } from "_services/account_service";
 import s from "./style.module.css";
-import {userService} from "../../../_services/user.service";
-import {useDispatch} from "react-redux";
-import {addUserToken} from "../../../store/user/user-slice";
+import { useDispatch } from "react-redux";
+import {
+  isLogged,
+  saveToken,
+  deleteToken,
+} from "../../../app/features/users/usersSlice";
 
 export function Login() {
   let navigate = useNavigate();
-const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-
-
-
-  const [credentials, setCredentials] = useState({
+  const [loginInput, setLoginInput] = useState({
     email: "tony@stark.com",
     password: "password123",
   });
 
   const onChange = (e) => {
-    setCredentials({
-      ...credentials,
+    setLoginInput({
+      ...loginInput,
       [e.target.name]: e.target.value,
     });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(credentials);
-    accountService.login(credentials)
+    console.log(loginInput);
+    accountService
+      .login(loginInput)
       .then((res) => {
         //reponse complète
         // console.log(res);
         //token dans la reponse
         // console.log(res.data.body.token);
-        const token = res.data.body.token
+        const token = res.data.body.token;
         //Save token in localstorage
         accountService.saveToken(token);
         //Save token in the store
-        dispatch(addUserToken(token))
+        dispatch(saveToken(token));
+        //Modif de isLogged en true
+        dispatch(isLogged());
+        //Navigation vers admin/profile
         navigate("/admin/profile");
       })
       .catch((error) => console.log(error));
@@ -56,7 +60,7 @@ const dispatch = useDispatch()
               type="text"
               name="email"
               id="email"
-              value={credentials.email}
+              value={loginInput.email}
               onChange={onChange}
             />
           </div>
@@ -66,7 +70,7 @@ const dispatch = useDispatch()
               type="password"
               name="password"
               id="password"
-              value={credentials.password}
+              value={loginInput.password}
               onChange={onChange}
             />
           </div>
@@ -75,7 +79,7 @@ const dispatch = useDispatch()
               type="checkbox"
               id="remember_me"
               name="checkbox"
-              checked={credentials.isChecked}
+              checked={loginInput.isChecked}
               onChange={onChange}
             />
             <label htmlFor="remember_me">Remember me</label>
