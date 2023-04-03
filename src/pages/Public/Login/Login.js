@@ -5,7 +5,10 @@ import s from "./style.module.css";
 import { useDispatch } from "react-redux";
 import {
   isLogged,
+  isLoggedOut,
   saveToken,
+  isChecked,
+  userLoginInfos,
   deleteToken,
 } from "../../../app/features/users/usersSlice";
 
@@ -17,12 +20,17 @@ export function Login() {
     email: "tony@stark.com",
     password: "password123",
   });
-
+  const [isBoxChecked, setBoxIsChecked] = useState(false);
+  console.log(isBoxChecked);
   const onChange = (e) => {
     setLoginInput({
       ...loginInput,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleCheckbox = () => {
+    setBoxIsChecked(!isBoxChecked);
   };
 
   const onSubmit = (e) => {
@@ -36,14 +44,28 @@ export function Login() {
         //token dans la reponse
         // console.log(res.data.body.token);
         const token = res.data.body.token;
-        //Save token in localstorage
-        accountService.saveToken(token);
-        //Save token in the store
-        dispatch(saveToken(token));
-        //Modif de isLogged en true
-        dispatch(isLogged());
-        //Navigation vers admin/profile
-        navigate("/admin/profile");
+
+        //Checkbox cochée ou non ?
+        if (isBoxChecked === true) {
+          console.log("isBoxChecked checked");
+          // dispatch(isChecked());
+          //Save token in the store
+          dispatch(saveToken(token));
+          //Save token in localstorage
+          accountService.saveToken(token);
+          dispatch(isLogged());
+          navigate("/admin/profile");
+        } else {
+          console.log("isBoxChecked unchecked");
+          dispatch(saveToken(token));
+          //Save token in localstorage
+          accountService.saveToken(token);
+          dispatch(isLogged());
+          //Modif de isLogged en true
+
+          //Navigation vers admin/profile
+          navigate("/admin/profile");
+        }
       })
       .catch((error) => console.log(error));
   };
@@ -79,8 +101,8 @@ export function Login() {
               type="checkbox"
               id="remember_me"
               name="checkbox"
-              checked={loginInput.isChecked}
-              onChange={onChange}
+              checked={isBoxChecked}
+              onChange={handleCheckbox}
             />
             <label htmlFor="remember_me">Remember me</label>
           </div>
