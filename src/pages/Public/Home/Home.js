@@ -1,7 +1,7 @@
 import React from "react";
-import chatIcon from "assets/img/icon-chat.png";
-import moneyIcon from "assets/img/icon-money.png";
-import featureIcon from "assets/img/icon-security.png";
+import chatIcon from "../../../assets/img/icon-chat.png";
+import moneyIcon from "../../../assets/img/icon-money.png";
+import featureIcon from "../../../assets/img/icon-security.png";
 import s from "./style.module.css";
 
 export function Home() {

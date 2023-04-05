@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { accountService } from "_services/account_service";
+import { useDispatch, useSelector } from "react-redux";
 import s from "./style.module.css";
-import { useDispatch } from "react-redux";
-import {
-  isLogged,
-  isLoggedOut,
-  saveToken,
-  isChecked,
-  userLoginInfos,
-  deleteToken,
-} from "../../../app/features/users/usersSlice";
+import { accountService } from "../../../_services/account_service";
+import {addToken,userLoggedIn} from "../../../app/features/auth/authSlice";
+
 
 export function Login() {
+
+  //Affichage du token
+  const token = useSelector((state => state.auth.userToken))
+  console.log(token);
+
   let navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -21,7 +20,7 @@ export function Login() {
     password: "password123",
   });
   const [isBoxChecked, setBoxIsChecked] = useState(false);
-  console.log(isBoxChecked);
+  // console.log(isBoxChecked);
   const onChange = (e) => {
     setLoginInput({
       ...loginInput,
@@ -35,37 +34,17 @@ export function Login() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(loginInput);
+    // console.log(loginInput);
     accountService
       .login(loginInput)
       .then((res) => {
-        //reponse complète
-        // console.log(res);
-        //token dans la reponse
-        // console.log(res.data.body.token);
+        const response = res.data;
+        console.log(response);
         const token = res.data.body.token;
-
-        //Checkbox cochée ou non ?
-        if (isBoxChecked === true) {
-          console.log("isBoxChecked checked");
-          // dispatch(isChecked());
-          //Save token in the store
-          dispatch(saveToken(token));
-          //Save token in localstorage
-          accountService.saveToken(token);
-          dispatch(isLogged());
-          navigate("/admin/profile");
-        } else {
-          console.log("isBoxChecked unchecked");
-          dispatch(saveToken(token));
-          //Save token in localstorage
-          accountService.saveToken(token);
-          dispatch(isLogged());
-          //Modif de isLogged en true
-
-          //Navigation vers admin/profile
-          navigate("/admin/profile");
-        }
+        accountService.saveToken();
+        dispatch(addToken(token))
+        dispatch(userLoggedIn())
+        navigate("/user/profile");
       })
       .catch((error) => console.log(error));
   };

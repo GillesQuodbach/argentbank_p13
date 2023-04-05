@@ -1,12 +1,12 @@
-import { Footer } from "components/Footer/Footer";
+import { Footer } from "../../components/Footer/Footer";
 import React from "react";
-import { Header } from "components/Header/Header";
+import { PublicHeader } from "../../components/PublicHeader/PublicHeader";
 import { Outlet } from "react-router-dom";
 
 export const PublicLayout = () => {
   return (
     <div className="PublicLayout">
-      <Header />
+      <PublicHeader />
       <Outlet />
       <Footer />
     </div>
