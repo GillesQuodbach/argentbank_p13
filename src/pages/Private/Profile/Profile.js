@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import s from "./style.module.css";
+import { accountService } from "../../../_services/account_service";
+import { useSelector } from "react-redux";
 
 export function Profile() {
   const [firstName, setFirstName] = useState("");

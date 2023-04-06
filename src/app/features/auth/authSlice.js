@@ -26,6 +26,7 @@ const authSlice = createSlice({
       state.userToken = null;
       state.isLogged = true;
       localStorage.clear();
+      sessionStorage.clear();
       console.log("removeToken");
     },
   },
@@ -42,7 +43,7 @@ const authSlice = createSlice({
       state.userToken = action.payload;
       state.error = "";
       localStorage.setItem("token", state.userToken.token);
-      console.log("checked", state.userToken);
+      sessionStorage.setItem("token", state.userToken.token);
     });
 
     //LOGIN ERROR

@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+
 let isLogged = () => {
   let token = localStorage.getItem("token");
   return !!token; //permet de transformer n'importe quelle variable en booleen
@@ -7,6 +9,9 @@ let saveToken = (token) => {
   return localStorage.setItem("token", token);
 };
 
+let getSessionStorageToken = () => {
+  return sessionStorage.getItem("token");
+};
 let getToken = () => {
   return localStorage.getItem("token");
 };
@@ -20,4 +25,5 @@ export const accountService = {
   getToken,
   saveToken,
   deleteToken,
+  getSessionStorageToken,
 };

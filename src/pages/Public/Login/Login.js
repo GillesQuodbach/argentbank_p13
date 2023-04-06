@@ -3,15 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./style.module.css";
 import { accountService } from "../../../_services/account_service";
-import { addToken, userLoggedIn } from "../../../app/features/auth/authSlice";
 import { fetchLogin } from "../../../app/features/auth/authSlice";
-import { isFulfilled } from "@reduxjs/toolkit";
 
 export function Login() {
   //Affichage du token
   // const token = useSelector((state) => state.auth.userToken);
   // console.log(token);
-
   useEffect(() => {
     // console.log("localStorage", localStorage);
     // console.log("sessionStorage", sessionStorage);

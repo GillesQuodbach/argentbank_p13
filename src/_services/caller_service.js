@@ -10,9 +10,13 @@ const Axios = axios.create({
  */
 
 Axios.interceptors.request.use((request) => {
-  if (accountService.isLogged()) {
+  if (accountService.getToken()) {
     request.headers.Authorization = "Bearer" + accountService.getToken();
+  } else if (accountService.getSessionStorageToken()) {
+    request.headers.Authorization =
+      "Bearer" + accountService.getSessionStorageToken();
   }
+
   return request;
 });
 

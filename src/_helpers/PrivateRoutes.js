@@ -6,7 +6,11 @@ import { accountService } from "../_services/account_service";
 
 const useAuth = () => {
   const userStatus = useSelector((state) => state.auth.status);
-  if (accountService.getToken() || userStatus === 200) {
+  if (
+    accountService.getToken() ||
+    accountService.getSessionStorageToken() ||
+    userStatus === 200
+  ) {
     return true;
   } else {
     return false;
