@@ -2,16 +2,15 @@ import React from "react";
 import logo from "../../../assets/img/argentBankLogo.png";
 import { NavLink } from "react-router-dom";
 import s from "./style.module.css";
-
+import { userLogOut } from "../../../app/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-
 
 export function PrivateHeader() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const logout = () => {
-
+    dispatch(userLogOut());
     navigate("/");
   };
 

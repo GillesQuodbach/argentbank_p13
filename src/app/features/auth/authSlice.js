@@ -1,53 +1,60 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, createAction } from "@reduxjs/toolkit";
 
 import Axios from "../../../_services/caller_service";
 
 const initialState = {
-  isLoading:false,
-  isLogged:false,
-  userToken: '',
-  error:'',
-}
- const fetchLogin = createAsyncThunk('auth/fetchLogin', (loginInput)=> {
-  return Axios.post("user/login", loginInput)
-    .then(res => res.data)
-    })
-
+  status: 0,
+  isLoading: false,
+  isLogged: false,
+  userToken: "",
+  error: "",
+};
+export const fetchLogin = createAsyncThunk("auth/loginUser", (loginInput) => {
+  return Axios.post("user/login", loginInput).then((res) => res.data.body);
+});
 
 const authSlice = createSlice({
-  name:'auth',
+  name: "auth",
   initialState,
   reducers: {
     addToken: (state, action) => {
-      state.userToken = action.payload;
-      console.log('addToken');
+      state.userToken = localStorage.getItem("token");
+      console.log("addToken");
     },
-    userLoggedIn: (state, action)=> {
-      state.isLogged = true
+    userLogOut: (state, action) => {
+      state.status = 0;
+      state.userToken = null;
+      state.isLogged = true;
+      localStorage.clear();
+      console.log("removeToken");
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     //LOGIN PENDING
-    builder.addCase(fetchLogin.pending, (state, action)=> {
-      state.isLoading = true
-    })
+    builder.addCase(fetchLogin.pending, (state, action) => {
+      state.isLoading = true;
+    });
     //LOGIN FULFILLED
-    builder.addCase(fetchLogin.fulfilled, (state, action)=> {
-      state.isLoading = false
-      state.token = action.payload
-      state.error = ''
-    })
+    builder.addCase(fetchLogin.fulfilled, (state, action) => {
+      state.status = 200;
+      state.isLoading = false;
+      state.isLogged = true;
+      state.userToken = action.payload;
+      state.error = "";
+      localStorage.setItem("token", state.userToken.token);
+      console.log("checked", state.userToken);
+    });
+
     //LOGIN ERROR
-    builder.addCase(fetchLogin.rejected, (state, action)=> {
-      state.isLoading = false
-      state.token = ""
-      state.error = action.error.message
-    })
+    builder.addCase(fetchLogin.rejected, (state, action) => {
+      state.status = 400;
+      state.isLoading = false;
+      state.token = "";
+      state.error = action.error.message;
+    });
+  },
+});
 
-  }
-
-})
-
-
-export default authSlice.reducer
-export const { addToken,userLoggedIn } = authSlice.actions;
+export default authSlice.reducer;
+export const { addToken, userLoggedIn, removeToken, userLogOut } =
+  authSlice.actions;

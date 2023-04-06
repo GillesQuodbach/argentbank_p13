@@ -3,18 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./style.module.css";
 import { accountService } from "../../../_services/account_service";
-import {addToken,userLoggedIn} from "../../../app/features/auth/authSlice";
-
+import { addToken, userLoggedIn } from "../../../app/features/auth/authSlice";
+import { fetchLogin } from "../../../app/features/auth/authSlice";
+import { isFulfilled } from "@reduxjs/toolkit";
 
 export function Login() {
-
   //Affichage du token
-  const token = useSelector((state => state.auth.userToken))
-  console.log(token);
+  // const token = useSelector((state) => state.auth.userToken);
+  // console.log(token);
 
-  let navigate = useNavigate();
+  useEffect(() => {
+    // console.log("localStorage", localStorage);
+    // console.log("sessionStorage", sessionStorage);
+  }, []);
+
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [loginInput, setLoginInput] = useState({
     email: "tony@stark.com",
     password: "password123",
@@ -32,21 +36,19 @@ export function Login() {
     setBoxIsChecked(!isBoxChecked);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
+    //TODO REMEMBER -> checked token illimité / unchecked tps token limité
     e.preventDefault();
-    // console.log(loginInput);
-    accountService
-      .login(loginInput)
-      .then((res) => {
-        const response = res.data;
-        console.log(response);
-        const token = res.data.body.token;
-        accountService.saveToken();
-        dispatch(addToken(token))
-        dispatch(userLoggedIn())
-        navigate("/user/profile");
-      })
-      .catch((error) => console.log(error));
+
+    try {
+      await dispatch(fetchLogin(loginInput));
+      if (!isBoxChecked) {
+        accountService.deleteToken();
+      }
+      navigate("/user/profile/");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

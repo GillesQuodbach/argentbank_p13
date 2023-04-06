@@ -1,23 +1,20 @@
-import {Outlet}  from 'react-router'
-import { Profile } from '../pages/Private/Profile/Profile'
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import {PrivateLayout} from "../pages/Private/PrivateLayout";
-
+import { PrivateLayout } from "../pages/Private/PrivateLayout";
 import React from "react";
+import { accountService } from "../_services/account_service";
 
-const useAuth = ()=> {
-  //Affichage du token
-  //TODO FONCTION REMEMBER ?
-  const isUserLogged = useSelector((state => state.auth.isLogged))
-  console.log(isUserLogged);
-  const user = {loggedIn:isUserLogged}
-  return  user && user.loggedIn
-}
-
+const useAuth = () => {
+  const userStatus = useSelector((state) => state.auth.status);
+  if (accountService.getToken() || userStatus === 200) {
+    return true;
+  } else {
+    return false;
+  }
+};
 const PrivateRoutes = () => {
-  const isAuth = useAuth()
-  return isAuth ? <PrivateLayout/> : <Navigate to={"/login"}/>
-}
+  const isAuth = useAuth();
+  return isAuth ? <PrivateLayout /> : <Navigate to={"/login"} />;
+};
 
-export default PrivateRoutes
+export default PrivateRoutes;

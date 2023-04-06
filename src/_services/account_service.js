@@ -1,29 +1,23 @@
-import Axios from "./caller_service";
-
-let login = (loginInput) => {
-  return Axios.post("user/login", loginInput);
-};
-let saveToken = (token) => {
-  localStorage.setItem("token", token);
-};
-
-let logout = () => {
-  localStorage.removeItem("token");
-};
-
 let isLogged = () => {
   let token = localStorage.getItem("token");
   return !!token; //permet de transformer n'importe quelle variable en booleen
+};
+
+let saveToken = (token) => {
+  return localStorage.setItem("token", token);
 };
 
 let getToken = () => {
   return localStorage.getItem("token");
 };
 
+let deleteToken = () => {
+  return localStorage.removeItem("token");
+};
+
 export const accountService = {
-  login,
-  saveToken,
-  logout,
   isLogged,
   getToken,
+  saveToken,
+  deleteToken,
 };
