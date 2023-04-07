@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./style.module.css";
-import { fetchUser } from "../../../app/features/user/userSlice";
+import { fetchUser, editInput } from "../../../app/features/user/userSlice";
+import UserInput from "../../../components/UserInput/UserInput";
 
 export function Profile() {
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
-
+  // const [isEditable, setIsEditable] = useState(false);
   const userSlice = useSelector((state) => state.user);
-  console.log(userSlice);
-
   const userInfos = useSelector((state) => state.user.userInfo);
-  console.log("*********", userInfos);
-
-  // const firstName = useSelector((state) => state.user.userInfo.body.firstName);
-  //
+  const isEditable = useSelector((state) => state.user.isInputsEditable);
 
   const dispatch = useDispatch();
+
+  const handleEdit = () => {
+    dispatch(editInput());
+    console.log(isEditable);
+  };
 
   useEffect(() => {
     dispatch(fetchUser());
@@ -33,11 +32,16 @@ export function Profile() {
           <h1 className={s.user_infos_container}>
             Welcome back
             <br />
-            {userInfos?.body?.firstName} {userInfos?.body?.lastName}
+            {!isEditable ? (
+              `${userInfos?.body?.firstName} ${userInfos?.body?.lastName}`
+            ) : (
+              <UserInput />
+            )}
           </h1>
         )}
-        {/*{userSlice.userInfo.body.firstName}*/}
-        <button className={s.edit_button}>Edit Name</button>
+        <button onClick={handleEdit} className={s.edit_button}>
+          Edit Name
+        </button>
       </div>
 
       <h2 className={s.sr_only}>Accounts</h2>

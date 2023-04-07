@@ -3,12 +3,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import Axios from "../../../_services/caller_service";
 import { fetchLogin } from "../auth/authSlice";
+import { isEditableInput } from "@testing-library/user-event/dist/utils";
 
 const initialState = {
   isLoading: false,
   status: 0,
   userInfo: [],
   error: "",
+  isInputsEditable: false,
 };
 
 export const fetchUser = createAsyncThunk("user/fetchUser", () => {
@@ -20,7 +22,15 @@ export const fetchUser = createAsyncThunk("user/fetchUser", () => {
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    editInput: (state, action) => {
+      state.isInputsEditable = !state.isInputsEditable;
+    },
+    updateUserName: (state, action) => {
+      state.userInfo = action.payload;
+      console.log("updateUserName");
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchUser.pending, (state, action) => {
       state.isLoading = true;
@@ -39,4 +49,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const {} = userSlice.actions;
+export const { updateUserName, editInput } = userSlice.actions;

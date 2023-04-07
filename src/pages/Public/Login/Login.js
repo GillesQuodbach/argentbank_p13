@@ -37,9 +37,7 @@ export function Login() {
   };
 
   const onSubmit = async (e) => {
-    //TODO REMEMBER -> checked token illimité / unchecked tps token limité
     e.preventDefault();
-
     try {
       dispatch(addUserLoginInfos(loginInput));
       await dispatch(fetchLogin(loginInput));
