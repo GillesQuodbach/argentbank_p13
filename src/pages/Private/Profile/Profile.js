@@ -28,20 +28,23 @@ export function Profile() {
           <p>Veuillez patienter ...</p>
         ) : userSlice.error ? (
           <p>Erreur</p>
+        ) : !isEditable ? (
+          <>
+            <h1 className={s.user_infos_container}>
+              Welcome back
+              <br />
+              {userInfos?.body?.firstName} {userInfos?.body?.lastName}
+            </h1>
+            <button onClick={handleEdit} className={s.edit_button}>
+              Edit Name
+            </button>
+          </>
         ) : (
-          <h1 className={s.user_infos_container}>
-            Welcome back
-            <br />
-            {!isEditable ? (
-              `${userInfos?.body?.firstName} ${userInfos?.body?.lastName}`
-            ) : (
-              <UserInput />
-            )}
-          </h1>
+          <>
+            <h1 className={s.user_infos_editable_container}>Welcome back</h1>
+            <UserInput />
+          </>
         )}
-        <button onClick={handleEdit} className={s.edit_button}>
-          Edit Name
-        </button>
       </div>
 
       <h2 className={s.sr_only}>Accounts</h2>
