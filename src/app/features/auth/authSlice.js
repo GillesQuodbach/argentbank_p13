@@ -6,6 +6,7 @@ const initialState = {
   status: 0,
   isLoading: false,
   isLogged: false,
+  userLoginInfos: "",
   userToken: "",
   error: "",
 };
@@ -20,6 +21,10 @@ const authSlice = createSlice({
     addToken: (state, action) => {
       state.userToken = localStorage.getItem("token");
       console.log("addToken");
+    },
+    addUserLoginInfos: (state, action) => {
+      state.userLoginInfos = action.payload;
+      console.log("addUserLoginInfos");
     },
     userLogOut: (state, action) => {
       state.status = 0;
@@ -57,5 +62,10 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { addToken, userLoggedIn, removeToken, userLogOut } =
-  authSlice.actions;
+export const {
+  addToken,
+  userLoggedIn,
+  removeToken,
+  userLogOut,
+  addUserLoginInfos,
+} = authSlice.actions;

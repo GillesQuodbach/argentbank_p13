@@ -1,20 +1,42 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import s from "./style.module.css";
-import { accountService } from "../../../_services/account_service";
-import { useSelector } from "react-redux";
+import { fetchUser } from "../../../app/features/user/userSlice";
 
 export function Profile() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  // const [firstName, setFirstName] = useState("");
+  // const [lastName, setLastName] = useState("");
+
+  const userSlice = useSelector((state) => state.user);
+  console.log(userSlice);
+
+  const userInfos = useSelector((state) => state.user.userInfo);
+  console.log("*********", userInfos);
+
+  // const firstName = useSelector((state) => state.user.userInfo.body.firstName);
+  //
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, [fetchUser]);
 
   return (
     <main className={`${s.main} ${s.bg_dark}`}>
       <div className={s.header}>
-        <h1 className={s.user_infos_container}>
-          Welcome back
-          <br />
-          {firstName} {lastName}
-        </h1>
+        {userSlice.isLoading ? (
+          <p>Veuillez patienter ...</p>
+        ) : userSlice.error ? (
+          <p>Erreur</p>
+        ) : (
+          <h1 className={s.user_infos_container}>
+            Welcome back
+            <br />
+            {userInfos?.body?.firstName} {userInfos?.body?.lastName}
+          </h1>
+        )}
+        {/*{userSlice.userInfo.body.firstName}*/}
         <button className={s.edit_button}>Edit Name</button>
       </div>
 
