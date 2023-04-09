@@ -20,9 +20,10 @@ function UserInput() {
     fetchUser();
   }, [fetchUser]);
   const [userInputsValue, setUserInputsValue] = useState({
-    firstName: "",
-    lastName: "",
+    firstName: userFirstName ? userFirstName : "",
+    lastName: userLastName ? userLastName : "",
   });
+
   // console.log(userInputsValue);
   const onChange = (e) => {
     setUserInputsValue({
@@ -53,7 +54,7 @@ function UserInput() {
           name="firstName"
           id="firstName"
           value={userInputsValue.firstName}
-          placeholder={userFirstName}
+          // placeholder={userFirstName}
           onChange={onChange}
         />
         <input
@@ -61,7 +62,7 @@ function UserInput() {
           type="text"
           name="lastName"
           id="lastName"
-          placeholder={userLastName}
+          // placeholder={userLastName}
           value={userInputsValue.lastName}
           onChange={onChange}
         />
