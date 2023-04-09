@@ -5,7 +5,7 @@ const Axios = axios.create({
   baseURL: "http://localhost:3001/api/v1",
 });
 /**
- *  Intercepteur pour le token
+ *  token interceptor
  */
 Axios.interceptors.request.use((request) => {
   if (accountService.getToken()) {

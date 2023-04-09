@@ -5,35 +5,17 @@ import {
   editInput,
   fetchUser,
   updateUser,
-  updateUserName,
 } from "../../app/features/user/userSlice";
-
-const handleFirstName = () => {
-  console.log("handleFirstName");
-};
-const handleLastName = () => {
-  console.log("handleLastName");
-};
-
-// export const updateUserInfos = createAsyncThunk(
-//   "user/updateUserInfos",
-//   (userInfosToUpdate) => {
-//     return Axios.put("/user/profile", userInfosToUpdate).then((res) => {
-//       console.log(res.data);
-//       return res.data;
-//     });
-//   }
-// );
 
 function UserInput() {
   const userFirstName = useSelector(
     (state) => state.user.userInfo.body.firstName
   );
-  console.log(userFirstName);
+  // console.log(userFirstName);
   const userLastName = useSelector(
     (state) => state.user.userInfo.body.lastName
   );
-  console.log(userLastName);
+  // console.log(userLastName);
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
@@ -41,7 +23,7 @@ function UserInput() {
     firstName: "",
     lastName: "",
   });
-  console.log(userInputsValue);
+  // console.log(userInputsValue);
   const onChange = (e) => {
     setUserInputsValue({
       ...userInputsValue,
@@ -51,14 +33,14 @@ function UserInput() {
   const dispatch = useDispatch();
 
   const handleSaveEdit = () => {
-    console.log("save edit");
+    // console.log("save edit");
     dispatch(updateUser(userInputsValue));
     dispatch(fetchUser());
     dispatch(editInput());
   };
 
   const handleCancelEdit = () => {
-    console.log("cancel edit");
+    // console.log("cancel edit");
     dispatch(editInput());
   };
 

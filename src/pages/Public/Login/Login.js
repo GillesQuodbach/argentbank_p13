@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import s from "./style.module.css";
 import { accountService } from "../../../_services/account_service";
 import {
@@ -9,15 +9,6 @@ import {
 } from "../../../app/features/auth/authSlice";
 
 export function Login() {
-  //Affichage du token
-  // const token = useSelector((state) => state.auth.userToken);
-  // console.log(token);
-  useEffect(() => {
-    // console.log("localStorage", localStorage);
-
-    // console.log("sessionStorage", sessionStorage);
-  }, []);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginInput, setLoginInput] = useState({
@@ -91,9 +82,6 @@ export function Login() {
           <button type="submit" className={s.sign_in_button}>
             Sign In
           </button>
-          {/* <!-- SHOULD BE THE BUTTON BELOW -->
-      <!-- <button className={s.sign-in-button}>Sign In</button> -->
-      <!--  --> */}
         </form>
       </section>
     </main>

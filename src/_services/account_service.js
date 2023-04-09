@@ -1,5 +1,3 @@
-import { useSelector } from "react-redux";
-
 let isLogged = () => {
   let token = localStorage.getItem("token");
   return !!token; //permet de transformer n'importe quelle variable en booleen

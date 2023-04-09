@@ -19,7 +19,7 @@ export const fetchUser = createAsyncThunk("user/fetchUser", () => {
 //Update user
 export const updateUser = createAsyncThunk("user/updateUser", (userInfos) => {
   return Axios.put("/user/profile", userInfos).then((res) => {
-    console.log(res.data);
+    // console.log(res.data);
     return res.data;
   });
 });
@@ -37,7 +37,7 @@ const userSlice = createSlice({
     updateUserName: (state, action) => {
       state.userInfo.body.firstName = action.payload;
       state.userInfo.body.lastName = action.payload;
-      console.log("updateUserName");
+      // console.log("updateUserName");
     },
   },
   extraReducers: (builder) => {
@@ -74,5 +74,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { updateUserName, editInput, initialEditInput } =
-  userSlice.actions;
+export const { editInput, initialEditInput } = userSlice.actions;

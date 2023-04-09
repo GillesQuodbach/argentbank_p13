@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, createAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import Axios from "../../../_services/caller_service";
 
@@ -20,11 +20,11 @@ const authSlice = createSlice({
   reducers: {
     addToken: (state, action) => {
       state.userToken = localStorage.getItem("token");
-      console.log("addToken");
+      // console.log("addToken");
     },
     addUserLoginInfos: (state, action) => {
       state.userLoginInfos = action.payload;
-      console.log("addUserLoginInfos");
+      // console.log("addUserLoginInfos");
     },
     userLogOut: (state, action) => {
       state.status = 0;
@@ -32,7 +32,7 @@ const authSlice = createSlice({
       state.isLogged = true;
       localStorage.clear();
       sessionStorage.clear();
-      console.log("removeToken");
+      // console.log("removeToken");
     },
   },
   extraReducers: (builder) => {
@@ -62,10 +62,4 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const {
-  addToken,
-  userLoggedIn,
-  removeToken,
-  userLogOut,
-  addUserLoginInfos,
-} = authSlice.actions;
+export const { userLogOut, addUserLoginInfos } = authSlice.actions;
