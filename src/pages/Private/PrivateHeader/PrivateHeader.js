@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import s from "./style.module.css";
 import { userLogOut } from "../../../app/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export function PrivateHeader() {
   const navigate = useNavigate();
@@ -13,6 +13,8 @@ export function PrivateHeader() {
     dispatch(userLogOut());
     navigate("/");
   };
+
+  const userName = useSelector((state) => state.user.userInfo.body);
 
   return (
     <nav className={s.main_nav}>
@@ -25,8 +27,18 @@ export function PrivateHeader() {
         <h1 className={s.sr_only}>Argent Bank</h1>
       </NavLink>
       <div>
-        <NavLink to="/" className={s.main_nav_item} onClick={logout}>
+        <NavLink
+          to="/user/profile"
+          className={s.main_nav_user}
+          onClick={logout}
+        >
           <i className={`fa fa-user-circle ${s.header_signin_link}`}></i>
+          {userName?.firstName}
+        </NavLink>
+        <NavLink to="/" className={s.main_nav_item} onClick={logout}>
+          <i
+            className={`fa-solid fa-arrow-right-from-bracket ${s.header_signin_link}`}
+          ></i>
           LogOut
         </NavLink>
       </div>

@@ -14,6 +14,7 @@ export function Login() {
   // console.log(token);
   useEffect(() => {
     // console.log("localStorage", localStorage);
+
     // console.log("sessionStorage", sessionStorage);
   }, []);
 

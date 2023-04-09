@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, connect } from "react-redux";
 import s from "./style.module.css";
-import { fetchUser, editInput } from "../../../app/features/user/userSlice";
+import {
+  fetchUser,
+  editInput,
+  initialEditInput,
+} from "../../../app/features/user/userSlice";
 import UserInput from "../../../components/UserInput/UserInput";
 
 export function Profile() {
@@ -9,7 +13,6 @@ export function Profile() {
   const userSlice = useSelector((state) => state.user);
   const userInfos = useSelector((state) => state.user.userInfo);
   const isEditable = useSelector((state) => state.user.isInputsEditable);
-
   const dispatch = useDispatch();
 
   const handleEdit = () => {
@@ -19,6 +22,7 @@ export function Profile() {
 
   useEffect(() => {
     dispatch(fetchUser());
+    dispatch(initialEditInput());
   }, [fetchUser]);
 
   return (
