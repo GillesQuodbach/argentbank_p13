@@ -17,7 +17,7 @@ export function Profile() {
 
   const handleEdit = () => {
     dispatch(editInput());
-    console.log(isEditable);
+    // console.log(isEditable);
   };
 
   useEffect(() => {
