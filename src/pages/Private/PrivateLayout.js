@@ -1,14 +1,16 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import { PrivateHeader } from "./PrivateHeader/PrivateHeader";
 import { Footer } from "../../components/Footer/Footer";
-import { Profile } from "./Profile/Profile";
 
-export const PrivateLayout = () => {
+const PrivateLayout = () => {
   return (
-    <div className="adminLayout">
+    <div className="privateLayout">
       <PrivateHeader />
-      <Profile />
+      <Outlet />
       <Footer />
     </div>
   );
 };
+
+export default PrivateLayout;

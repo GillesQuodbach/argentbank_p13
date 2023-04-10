@@ -6,6 +6,7 @@ import {
   editInput,
   initialEditInput,
 } from "../../../app/features/user/userSlice";
+import { userLoggedIn } from "../../../app/features/auth/authSlice";
 import UserInput from "../../../components/UserInput/UserInput";
 
 export function Profile() {
@@ -23,6 +24,7 @@ export function Profile() {
   useEffect(() => {
     dispatch(fetchUser());
     dispatch(initialEditInput());
+    dispatch(userLoggedIn());
   }, [fetchUser]);
 
   return (

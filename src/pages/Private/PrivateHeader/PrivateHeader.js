@@ -18,7 +18,7 @@ export function PrivateHeader() {
 
   return (
     <nav className={s.main_nav}>
-      <NavLink to="/" className={s.main_nav_logo}>
+      <NavLink to="/user/home" className={s.main_nav_logo}>
         <img
           className={s.main_nav_logo_image}
           src={logo}
@@ -27,11 +27,7 @@ export function PrivateHeader() {
         <h1 className={s.sr_only}>Argent Bank</h1>
       </NavLink>
       <div>
-        <NavLink
-          to="/user/profile"
-          className={s.main_nav_user}
-          onClick={logout}
-        >
+        <NavLink to="/user/profile" className={s.main_nav_user}>
           <i className={`fa fa-user-circle ${s.header_signin_link}`}></i>
           {userName?.firstName}
         </NavLink>

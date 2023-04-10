@@ -26,10 +26,13 @@ const authSlice = createSlice({
       state.userLoginInfos = action.payload;
       // console.log("addUserLoginInfos");
     },
+    userLoggedIn: (state, action) => {
+      state.isLogged = true;
+    },
     userLogOut: (state, action) => {
       state.status = 0;
       state.userToken = null;
-      state.isLogged = true;
+      state.isLogged = false;
       localStorage.clear();
       sessionStorage.clear();
       // console.log("removeToken");
@@ -39,6 +42,7 @@ const authSlice = createSlice({
     //LOGIN PENDING
     builder.addCase(fetchLogin.pending, (state, action) => {
       state.isLoading = true;
+      state.isLogged = false;
     });
     //LOGIN FULFILLED
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
@@ -55,6 +59,7 @@ const authSlice = createSlice({
     builder.addCase(fetchLogin.rejected, (state, action) => {
       state.status = 400;
       state.isLoading = false;
+      state.isLogged = false;
       state.token = "";
       state.error = action.error.message;
     });
@@ -62,4 +67,5 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { userLogOut, addUserLoginInfos } = authSlice.actions;
+export const { userLoggedIn, userLogOut, addUserLoginInfos } =
+  authSlice.actions;
