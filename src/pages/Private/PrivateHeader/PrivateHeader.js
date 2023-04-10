@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "../../../assets/img/argentBankLogo.png";
 import { NavLink } from "react-router-dom";
 import s from "./style.module.css";
 import { userLogOut } from "../../../app/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchUser } from "../../../app/features/user/userSlice";
 
 export function PrivateHeader() {
   const navigate = useNavigate();
@@ -13,7 +14,9 @@ export function PrivateHeader() {
     dispatch(userLogOut());
     navigate("/");
   };
-
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, [fetchUser]);
   const userName = useSelector((state) => state.user.userInfo.body);
 
   return (
