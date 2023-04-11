@@ -8,6 +8,7 @@ import {
 } from "../../../app/features/user/userSlice";
 import { userLoggedIn } from "../../../app/features/auth/authSlice";
 import UserInput from "../../../components/UserInput/UserInput";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export function Profile() {
   // const [isEditable, setIsEditable] = useState(false);
@@ -15,6 +16,11 @@ export function Profile() {
   const userInfos = useSelector((state) => state.user.userInfo);
   const isEditable = useSelector((state) => state.user.isInputsEditable);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleTransaction = () => {
+    console.log("handleTransaction");
+    navigate("/user/profile/:transactionId");
+  };
 
   const handleEdit = () => {
     dispatch(editInput());
@@ -62,7 +68,9 @@ export function Profile() {
           <p className={s.account_amount_description}>Available Balance</p>
         </div>
         <div className={`${s.account_content_wrapper} ${s.cta}`}>
-          <button className={s.transaction_button}>View transactions</button>
+          <button onClick={handleTransaction} className={s.transaction_button}>
+            View transactions
+          </button>
         </div>
       </section>
 
@@ -73,7 +81,9 @@ export function Profile() {
           <p className={s.account_amount_description}>Available Balance</p>
         </div>
         <div className={`${s.account_content_wrapper} ${s.cta}`}>
-          <button className={s.transaction_button}>View transactions</button>
+          <button onClick={handleTransaction} className={s.transaction_button}>
+            View transactions
+          </button>
         </div>
       </section>
 
@@ -84,7 +94,9 @@ export function Profile() {
           <p className={s.account_amount_description}>Current Balance</p>
         </div>
         <div className={`${s.account_content_wrapper} ${s.cta}`}>
-          <button className={s.transaction_button}>View transactions</button>
+          <button onClick={handleTransaction} className={s.transaction_button}>
+            View transactions
+          </button>
         </div>
       </section>
     </main>
