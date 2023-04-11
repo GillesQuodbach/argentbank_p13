@@ -13,7 +13,7 @@ function PrivateRouter(props) {
         <Route index element={<Profile />} />
         <Route path="/home" element={<Home />} />
         <Route path="/profile/*" element={<Profile />} />
-        <Route path="/profile/transaction" element={<Transaction />} />
+        <Route path="/profile/:accountId" element={<Transaction />} />
         <Route path="/*" element={<PageNotFound />} />
       </Route>
     </Routes>

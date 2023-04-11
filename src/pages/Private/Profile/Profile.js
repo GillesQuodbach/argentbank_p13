@@ -8,7 +8,8 @@ import {
 } from "../../../app/features/user/userSlice";
 import { userLoggedIn } from "../../../app/features/auth/authSlice";
 import UserInput from "../../../components/UserInput/UserInput";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import TransactionButton from "../../../components/TransactionButton/TransactionButton";
 
 export function Profile() {
   // const [isEditable, setIsEditable] = useState(false);
@@ -17,9 +18,13 @@ export function Profile() {
   const isEditable = useSelector((state) => state.user.isInputsEditable);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleTransaction = () => {
+
+  const handleTransaction = (e) => {
+    e.preventDefault();
+
+    // console.log(account);
     console.log("handleTransaction");
-    navigate("/user/profile/:transactionId");
+    // navigate("/user/profile/:transactionId");
   };
 
   const handleEdit = () => {
@@ -62,41 +67,35 @@ export function Profile() {
       <h2 className={s.sr_only}>Accounts</h2>
 
       <section className={s.account}>
-        <div className={s.account_content_wrapper}>
+        <div id="account1" className={s.account_content_wrapper}>
           <h3 className={s.account_title}>Argent Bank Checking (x8349)</h3>
           <p className={s.account_amount}>$2,082.79</p>
           <p className={s.account_amount_description}>Available Balance</p>
         </div>
         <div className={`${s.account_content_wrapper} ${s.cta}`}>
-          <button onClick={handleTransaction} className={s.transaction_button}>
-            View transactions
-          </button>
+          <TransactionButton id={1} />
         </div>
       </section>
 
-      <section className={s.account}>
+      <section id="account2" className={s.account}>
         <div className={s.account_content_wrapper}>
           <h3 className={s.account_title}>Argent Bank Savings (x6712)</h3>
           <p className={s.account_amount}>$10,928.42</p>
           <p className={s.account_amount_description}>Available Balance</p>
         </div>
         <div className={`${s.account_content_wrapper} ${s.cta}`}>
-          <button onClick={handleTransaction} className={s.transaction_button}>
-            View transactions
-          </button>
+          <TransactionButton id={2} />
         </div>
       </section>
 
-      <section className={s.account}>
+      <section id="account3" className={s.account}>
         <div className={s.account_content_wrapper}>
           <h3 className={s.account_title}>Argent Bank Credit Card (x8349)</h3>
           <p className={s.account_amount}>$184.30</p>
           <p className={s.account_amount_description}>Current Balance</p>
         </div>
         <div className={`${s.account_content_wrapper} ${s.cta}`}>
-          <button onClick={handleTransaction} className={s.transaction_button}>
-            View transactions
-          </button>
+          <TransactionButton id={3} />
         </div>
       </section>
     </main>
