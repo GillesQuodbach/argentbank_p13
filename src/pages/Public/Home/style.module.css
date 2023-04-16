@@ -69,7 +69,7 @@
   .hero {
     display: flex;
     flex-direction: row;
-    height: 250px;
+    /*height: 250px;*/
   }
   .hero_content {
     height: 100px;
