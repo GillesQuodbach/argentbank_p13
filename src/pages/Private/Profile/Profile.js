@@ -21,15 +21,11 @@ export function Profile() {
 
   const handleTransaction = (e) => {
     e.preventDefault();
-
-    // console.log(account);
     console.log("handleTransaction");
-    // navigate("/user/profile/:transactionId");
   };
 
   const handleEdit = () => {
     dispatch(editInput());
-    // console.log(isEditable);
   };
 
   useEffect(() => {

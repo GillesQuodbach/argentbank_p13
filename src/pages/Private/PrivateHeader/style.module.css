@@ -58,6 +58,34 @@
     .main_nav_logo {
         max-width: 150px;
     }
+    .main_nav_user{
+        margin-right: 10px;
+        font-size: 0.8rem;
+    }
+    .main_nav_item{
+        font-size: 0.8rem;
+        margin-right: 0px;
+    }
+    .header_signin_link{
+        margin-right: 5px;
+    }
+}
+
+@media (min-width: 375px) {
+    .main_nav_logo {
+        max-width: 150px;
+    }
+    .main_nav_user{
+        margin-right: 1rem;
+        font-size: 1rem;
+    }
+    .main_nav_item{
+        font-size: 1rem;
+        margin-right: 1rem;
+    }
+    .header_signin_link{
+        margin-right: 5px;
+    }
 }
 
 @media (min-width: 768px) {

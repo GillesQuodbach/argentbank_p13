@@ -6,6 +6,16 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+@media (min-width: 320px) {
+    .user_inputs_container{
+        flex-direction: column;
+    }
+}
+@media (min-width: 1024px) {
+    .user_inputs_container{
+        flex-direction: row;
+    }
+}
 
 .user_input_firstName, .user_input_lastName {
     border: 2px solid rgba(0, 0, 0, 0.2);
@@ -25,6 +35,12 @@
     flex-direction: row;
     justify-content: center;
     gap: 20px;
+}
+
+@media (min-width: 320px) {
+    .user_button_container{
+        margin-top: 10px;
+    }
 }
 
 .save_button, .cancel_button {

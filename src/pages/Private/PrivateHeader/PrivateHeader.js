@@ -38,7 +38,7 @@ export function PrivateHeader() {
           <i
             className={`fa-solid fa-arrow-right-from-bracket ${s.header_signin_link}`}
           ></i>
-          LogOut
+          Sign Out
         </NavLink>
       </div>
     </nav>

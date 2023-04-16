@@ -60,8 +60,8 @@ const userSlice = createSlice({
       // console.log("updateUserName");
     },
   },
+  //FETCH USER
   extraReducers: (builder) => {
-    //FETCH USER
     builder.addCase(fetchUser.pending, (state, action) => {
       state.isLoading = true;
     });

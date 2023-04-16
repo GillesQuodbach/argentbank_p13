@@ -6,7 +6,7 @@ import { Home } from "../Public/Home/Home";
 import { PageNotFound } from "../Public/PageNotFound/PageNotFound";
 import Transaction from "./Transaction/Transaction";
 
-function PrivateRouter(props) {
+function PrivateRouter() {
   return (
     <Routes>
       <Route element={<PrivateLayout />}>
