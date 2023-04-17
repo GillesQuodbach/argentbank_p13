@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import s from "./style.module.css";
 import { accountService } from "../../../_services/account_service";
 import {
@@ -11,6 +11,23 @@ import {
 export function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userStatus = useSelector((state) => state.auth.status);
+  const userIsLogged = useSelector((state) => state.auth.isLogged);
+
+  useEffect(() => {
+    if (
+      accountService.getToken() ||
+      accountService.getSessionStorageToken() ||
+      userStatus === 200 ||
+      userIsLogged === true
+    ) {
+      // console.log("WE HAVE A TOKEN !!!!");
+      navigate("/user/profile");
+    } else {
+      // console.log("WE HAVE NO TOKEN");
+    }
+  }, []);
+
   const [loginInput, setLoginInput] = useState({
     email: "tony@stark.com",
     password: "password123",

@@ -8,9 +8,6 @@ function TransactionButton(props) {
   // console.log(props);
   const handleTransaction = (e) => {
     e.preventDefault();
-
-    // console.log(account);
-    console.log("handleTransaction");
     navigate(`/user/profile/${props.id}`);
   };
 

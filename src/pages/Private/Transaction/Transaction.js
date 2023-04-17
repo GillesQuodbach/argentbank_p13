@@ -13,7 +13,6 @@ function Transaction() {
   const storedAccountIndex = urlIdToNumber - 1;
 
   const currentAccountData = allStoredAccountData[storedAccountIndex];
-  console.log(currentAccountData);
 
   const handleGoToProfile = () => {
     navigate("/user/profile");
@@ -23,9 +22,11 @@ function Transaction() {
     <section className={s.account_container}>
       <div className={s.account}>
         <div id="account1" className={s.account_content_wrapper}>
-          <h3 className={s.account_title}>Argent Bank Checking (x8349)</h3>
-          <p className={s.account_amount}>$2,082.79</p>
-          <p className={s.account_amount_description}>Available Balance</p>
+          <h3 className={s.account_title}>{currentAccountData.title}</h3>
+          <p className={s.account_amount}>${currentAccountData.amount}</p>
+          <p className={s.account_amount_description}>
+            {currentAccountData.description}
+          </p>
         </div>
         <div className={`${s.account_content_wrapper} ${s.cta}`}>
           <button onClick={handleGoToProfile} className={s.transaction_button}>

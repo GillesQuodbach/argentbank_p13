@@ -3,7 +3,6 @@ import Axios from "../../../_services/caller_service";
 
 const initialState = {
   isLoading: false,
-  status: 0,
   userInfo: [],
   error: "",
   isInputsEditable: false,
