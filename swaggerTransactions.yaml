@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   title: Bank Argent API documentation
-  description: Contains all available API endpoints for transaction feature
+  description: Contains all available API endpoints for transactions feature
   version: '1.0.0'
   termsOfService: 'http://swagger.io/terms/'
 host: localhost:3001
@@ -17,6 +17,7 @@ paths:
       description: API for User Account/Transactionss List
       parameters:
         - in: header
+          type: string
           name: Authorization
           description: Attach Bearer JWT token
           required: true
@@ -34,7 +35,7 @@ paths:
           schema:
             $ref: '#/definitions/AccountResponse'
         '400':
-          description: Invalid Fields
+          description: Bad request
         '500':
           description: Internal Server Error
   /user/accounts/transactions:
@@ -45,6 +46,7 @@ paths:
       description: API for Transaction Details
       parameters:
         - in: header
+          type: string
           name: Authorization
           description: Attach Bearer JWT token
           required: true
@@ -62,7 +64,7 @@ paths:
           schema:
             $ref: '#/definitions/TransactionsResponse'
         '400':
-          description: Invalid Fields
+          description: Bad request
         '500':
           description: Internal Server Error
   /user/accounts/transactions/{transactionId}:
@@ -75,14 +77,14 @@ paths:
       description: API for fetching a transaction
       parameters:
         - in: header
+          type: string
           name: Authorization
           description: Attach Bearer JWT token
           required: true
-        - in: body
-          name: body
+        - in: path
+          type: integer
+          name: transactionId
           description: Transaction Id
-          schema:
-            $ref: '#/definitions/Account'
           required: true
       produces:
         - application/json
@@ -92,7 +94,7 @@ paths:
           schema:
             $ref: '#/definitions/TransactionsResponse'
         '400':
-          description: Invalid Fields
+          description: Bad request
         '500':
           description: Internal Server Error
     put:
@@ -104,14 +106,14 @@ paths:
       description: API for updating a transaction
       parameters:
         - in: header
+          type: string
           name: Authorization
           description: Attach Bearer JWT token
           required: true
-        - in: body
-          name: body
+        - in: path
+          type: integer
+          name: transactionId
           description: Transaction ID
-          schema:
-            $ref: '#/definitions/Transaction'
           required: true
       produces:
         - application/json
@@ -121,7 +123,7 @@ paths:
           schema:
             $ref: '#/definitions/TransactionResponse'
         '400':
-          description: Invalid Fields
+          description: Bad request
         '500':
           description: Internal Server Error
     delete:
@@ -133,14 +135,14 @@ paths:
       description: API for deleting a transaction
       parameters:
         - in: header
+          type: string
           name: Authorization
           description: Attach Bearer JWT token
           required: true
-        - in: body
-          name: body
+        - in: path
+          type: integer
+          name: transactionId
           description: Transaction ID
-          schema:
-            $ref: '#/definitions/Transaction'
           required: true
       produces:
         - application/json
@@ -150,7 +152,7 @@ paths:
           schema:
             $ref: '#/definitions/TransactionResponse'
         '400':
-          description: Invalid Fields
+          description: Bad request
         '500':
           description: Internal Server Error
   /user/accounts/transactions/:
@@ -163,6 +165,7 @@ paths:
       description: API for adding a transaction
       parameters:
         - in: header
+          type: string
           name: Authorization
           description: Attach Bearer JWT token
           required: true
@@ -180,7 +183,7 @@ paths:
           schema:
             $ref: '#/definitions/TransactionsResponse'
         '400':
-          description: Invalid Fields
+          description: Bad request
         '500':
           description: Internal Server Error
 
